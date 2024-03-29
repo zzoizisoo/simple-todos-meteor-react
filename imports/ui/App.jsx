@@ -18,6 +18,8 @@ export const App = () => {
     })
   }
 
+  const deleteTask = ({_id}) => TasksCollection.remove(_id)
+
   return (
     <div>
       <h1>Welcome to Meteor!</h1>
@@ -25,7 +27,7 @@ export const App = () => {
       <TaskForm />
 
       <ul>
-        {tasks.map(task => <Task key={task._id} task={task} onCheckboxClick={toggleChecked}/>)}
+        {tasks.map(task => <Task key={task._id} task={task} onCheckboxClick={toggleChecked} onDeleteClick={deleteTask}/>)}
       </ul>
 
       {/* <Hello/>
