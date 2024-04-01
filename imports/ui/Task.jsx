@@ -8,7 +8,7 @@ export const Task = ({ task, onCheckboxClick, onDeleteClick }) => {
         onClick={()=>onCheckboxClick(task)}
         readOnly
       />
-      {task.text}
+      <span>{task.text}</span>
 
       <button onClick={()=>onDeleteClick(task)}>&times;</button>
     </li>

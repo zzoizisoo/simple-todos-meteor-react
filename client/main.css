@@ -2,3 +2,57 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+
+.task-form{
+  display: flex;
+}
+
+.task-form input{ 
+  flex: 1;
+  height: 2rem;
+  border-radius: 0.5em 0 0 0.5em;
+  border: 1px solid black;
+}
+
+.task-form button{ 
+  border-radius:  0 0.5em 0.5em 0;
+  background-color: black;
+  color: white;
+  border: none;
+}
+
+ul{ 
+  /* decorate */
+  list-style-type: none;
+  padding-inline-start: 0;
+  
+}
+
+ul>li{ 
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em 0;
+  align-items: center;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.071);
+}
+
+ul>li>span{
+  flex-grow: 1;
+}
+
+ul>li>button{ 
+  background-color: #e15757;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex:none;
+}
+
+
+input[type="checkbox"] { 
+  margin-right: 1rem;
+}
