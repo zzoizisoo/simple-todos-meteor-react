@@ -21,7 +21,6 @@ export const App = () => {
     })
   }
 
-
   const deleteTask = ({_id}) => TasksCollection.remove(_id)
   
   return (
