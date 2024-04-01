@@ -56,3 +56,18 @@ ul>li>button{
 input[type="checkbox"] { 
   margin-right: 1rem;
 }
+
+.filter{ 
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+}
+
+.filter>button{ 
+  background-color: #57d2e1;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+}

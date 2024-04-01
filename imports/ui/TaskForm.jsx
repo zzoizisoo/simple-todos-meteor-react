@@ -27,7 +27,6 @@ export const TaskForm = () => {
                 value={text}
                 onChange={e => setText(e.target.value)}
             />
-
             <button type="submit" onClick={handleSubmit}>할 일 추가</button>
         </form>
     )
