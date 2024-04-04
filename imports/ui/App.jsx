@@ -16,8 +16,6 @@ export const App = () => {
     userPendingTask: { isChecked: {$ne: true}, userId: user ? user._id: {} }
   }
 
-
-
   const tasks = useTracker(() => {
     if (!user) return [];
     return TasksCollection.find(hideCompleted ? filters.userPendingTask : filters.user, { sort: { createdAt: -1 } }).fetch()
@@ -40,7 +38,6 @@ export const App = () => {
   }
 
   const logout = () => Meteor.logout();
-
   const deleteTask = ({ _id }) => TasksCollection.remove(_id)
 
   return (
@@ -48,7 +45,8 @@ export const App = () => {
       {user
         ? <Fragment>
           <div onClick={logout}>
-            {user.username}
+            {user.username || user.profile.name}
+            {/* BUG? github username이 user.profile.name이 아니라 user.services.github.username에 있음*/}
           </div>
           <h1>TODO {pendingTasksCount ? `(${pendingTasksCount})` : ''}</h1>
 

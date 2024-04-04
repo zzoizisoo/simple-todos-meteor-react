@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import {ServiceConfiguration} from 'meteor/service-configuration'
+
 import { TasksCollection } from '../imports/api/TasksCollection';
 
 const SEED_USERNAME = 'jisuchoi';
@@ -11,7 +13,6 @@ TasksCollection.insert({
   userId: user._id,
   createdAt: new Date(), 
 })
-
 
 Meteor.startup(async () => {
   if(!Accounts.findUserByUsername(SEED_USERNAME)){ 
@@ -30,4 +31,16 @@ Meteor.startup(async () => {
       'Third'
     ].forEach(taskText => insertTask(taskText, user))
   }
-});
+})
+
+
+ServiceConfiguration.configurations.upsert(
+  { service: 'github' },
+  {
+    $set: {
+      loginStyle: 'popup',
+      clientId: '6a905e8808574f154ae7', // insert your clientId here
+      secret: '8715e350bc626a6a6fc9b6afbdf88abba4f8a4a4', // insert your secret here
+    },
+  }
+);
