@@ -7,14 +7,12 @@ export const LoginForm = () => {
 
     const submit = e => { 
         e.preventDefault();
-
         Meteor.loginWithPassword(username, password);
     }
 
     return (
         <form onSubmit={submit} className='login-form'>
             <label htmlFor='username'>Username</label> 
-
             <input 
                 type='text'
                 placeholder='Username'
@@ -32,9 +30,7 @@ export const LoginForm = () => {
                 required
                 onChange={(e)=>setPassword(e.target.value)}
             />
-
             <button type='submit'>Log in</button>
-
         </form>
     )
 }
