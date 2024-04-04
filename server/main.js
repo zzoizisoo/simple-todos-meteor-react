@@ -5,7 +5,12 @@ import { TasksCollection } from '../imports/api/TasksCollection';
 const SEED_USERNAME = 'jisuchoi';
 const SEED_PASSWORD = 'password';
 
-const insertTask = taskText => TasksCollection.insert({ text: taskText })
+const insertTask = (taskText, user) => 
+TasksCollection.insert({ 
+  text: taskText, 
+  userId: user._id,
+  createdAt: new Date(), 
+})
 
 
 Meteor.startup(async () => {
@@ -15,11 +20,14 @@ Meteor.startup(async () => {
       password: SEED_PASSWORD
     })
   }
+
+  const user = Accounts.findUserByUsername(SEED_USERNAME)
+
   if(TasksCollection.find().count() ===0){ 
     [
       'First',
       'Second',
       'Third'
-    ].forEach(insertTask)
+    ].forEach(taskText => insertTask(taskText, user))
   }
 });
