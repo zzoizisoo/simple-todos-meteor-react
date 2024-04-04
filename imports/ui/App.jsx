@@ -11,22 +11,23 @@ export const App = () => {
   const user = useTracker(() => Meteor.user())
   const [hideCompleted, setHideCompleted] = useState(false)
 
-  const pendingTasksFilter = { isChecked: { $ne: true } }
-  const userFilter = user ? { userId: user._id } : {}
-  const pendingOnlyFilter = { ...pendingTasksFilter, ...userFilter };
+  const filters = { 
+    user: user ? { userId: user._id } : {},
+    userPendingTask: { isChecked: {$ne: true}, userId: user ? user._id: {} }
+  }
 
 
 
   const tasks = useTracker(() => {
     if (!user) return [];
-    return TasksCollection.find(hideCompleted ? pendingOnlyFilter : userFilter, { sort: { createdAt: -1 } }).fetch()
+    return TasksCollection.find(hideCompleted ? filters.userPendingTask : filters.user, { sort: { createdAt: -1 } }).fetch()
   })
 
   const pendingTasksCount = useTracker(() => {
     if (!user) {
       return 0;
     }
-    return TasksCollection.find(pendingOnlyFilter).count()
+    return TasksCollection.find(filters.userPendingTask).count()
   }
   );
 
