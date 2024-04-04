@@ -39,12 +39,17 @@ export const App = () => {
     })
   }
 
+  const logout = () => Meteor.logout();
+
   const deleteTask = ({ _id }) => TasksCollection.remove(_id)
 
   return (
     <div>
       {user
         ? <Fragment>
+          <div onClick={logout}>
+            {user.username}
+          </div>
           <h1>TODO {pendingTasksCount ? `(${pendingTasksCount})` : ''}</h1>
 
           <TaskForm user={user} />
