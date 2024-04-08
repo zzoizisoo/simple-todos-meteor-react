@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import {ServiceConfiguration} from 'meteor/service-configuration'
-
 import { TasksCollection } from '../imports/api/TasksCollection';
+import '/imports/api/tasksMethods';
+
 
 const SEED_USERNAME = 'jisuchoi';
 const SEED_PASSWORD = 'password';
