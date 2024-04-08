@@ -16,25 +16,35 @@ export const App = () => {
     userPendingTask: { isChecked: {$ne: true}, userId: user ? user._id: {} }
   }
 
-  const tasks = useTracker(() => {
-    if (!user) return [];
-    return TasksCollection.find(hideCompleted ? filters.userPendingTask : filters.user, { sort: { createdAt: -1 } }).fetch()
-  })
+  const {tasks, pendingTasksCount, isLoading} = useTracker(()=>{ 
+    const noDataAvailable = {tasks: [], pendingTasksCount: 0};
 
-  const pendingTasksCount = useTracker(() => {
-    if (!user) {
-      return 0;
+    if(!Meteor.user()) {
+      return noDataAvailable;
     }
-    return TasksCollection.find(filters.userPendingTask).count()
-  }
-  );
+
+    const handler = Meteor.subscribe('tasks');
+
+    if(!handler.ready()){ 
+      return {...noDataAvailable, isLoading: true}
+    }
+
+    const tasks = TasksCollection.find(
+      hideCompleted? filters.userPendingTask : filters.user,{ 
+        sort: {createdAt : -1}
+      }
+    ).fetch();
+    const pendingTasksCount = TasksCollection.find(filters.userPendingTask).count()
+
+    return {tasks, pendingTasksCount}
+  })
 
   const toggleChecked = ({ _id, isChecked }) => {
     Meteor.call('tasks.setIsChecked', _id, !isChecked)
   }
-
-  const logout = () => Meteor.logout();
   const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id)
+  const logout = () => Meteor.logout();
+
 
   return (
     <div>
