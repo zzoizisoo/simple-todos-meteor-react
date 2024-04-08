@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
-import { TasksCollection } from './TasksCollection'
+import { TasksCollection } from '../db/TasksCollection'
+
 
 Meteor.methods({
     'tasks.insert'(text) { 
