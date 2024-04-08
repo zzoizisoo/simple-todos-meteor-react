@@ -30,15 +30,11 @@ export const App = () => {
   );
 
   const toggleChecked = ({ _id, isChecked }) => {
-    TasksCollection.update(_id, {
-      $set: {
-        isChecked: !isChecked
-      }
-    })
+    Meteor.call('tasks.setIsChecked', _id, !isChecked)
   }
 
   const logout = () => Meteor.logout();
-  const deleteTask = ({ _id }) => TasksCollection.remove(_id)
+  const deleteTask = ({ _id }) => Meteor.call('tasks.remove', _id)
 
   return (
     <div>
