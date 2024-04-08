@@ -63,6 +63,8 @@ export const App = () => {
               {hideCompleted ? 'Show All' : 'Hide Completed'}
             </button>
           </div>
+          
+          {isLoading && <div className="loading">loading...</div>}
 
           <ul>
             {tasks.map(task => <Task key={task._id} task={task} onCheckboxClick={toggleChecked} onDeleteClick={deleteTask} />)}
