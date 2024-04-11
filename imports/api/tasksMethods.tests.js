@@ -1,9 +1,23 @@
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random';
+import { TasksCollection } from '../db/TasksCollection';
+
+
 
 if (Meteor.isServer) {
   describe('Tasks', () => {
     describe('methods', () => {
-      it('can delete owned task', () => {});
+      const userId = Random.id();
+      let taskId;
+
+      beforeEach(()=>{ 
+        TasksCollection.remove({});
+        taskId = TasksCollection.insert({
+          text: 'Test Task',
+          createdAt: new Date(),
+          userId,
+        })
+      })
     });
   });
 }
